@@ -1,3 +1,5 @@
+// sanity stat that kills you if it runs out
+
 package com.SimonGradinForsgren.oop;
 import java.util.Scanner;
 

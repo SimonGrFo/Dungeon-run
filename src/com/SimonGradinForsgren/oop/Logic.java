@@ -8,6 +8,8 @@ public class Logic {
 
     static Player player;
 
+    public static boolean isRunning;
+
     //method to get user input from console
     public static int readInt(String prompt, int userChoices) {
         int input;
@@ -82,8 +84,64 @@ public class Logic {
         //create new player object with the name
         player = new Player(name);
 
+        //setting isRunning to true, so the game loop can continue
+        isRunning = true;
+
+
         //start main game loop
-        //gameLoop();
+        gameLoop();
     }
 
+
+    //method to continue the journey
+    public static void continueJourney() {
+
+    }
+
+    //printing out the most important information about the player character
+    public static void characterInfo() {
+        clearConsole();
+        printHeading("STATUS");
+        System.out.println(player.name + "/tHP: " + player.hp + "/" + player.maxHp);
+        printSeparator(20);
+        System.out.println("XP: " + player.xp);
+
+        //printing the chosen traits
+        if (player.numAtkUpgrades > 0) {
+            System.out.println("Offensive trait: " + player.AtkUpgrades[player.numAtkUpgrades - 1]);
+        }
+        if (player.numDefUpgrades > 0) {
+            System.out.println("Defensive trait: " + player.DefUpgrades[player.numDefUpgrades - 1]);
+        }
+
+        anythingToContinue();
+    }
+
+    //printing the main menu
+    public static void printMenu() {
+        clearConsole();
+        printHeading("MENU");
+        System.out.println("Choose an action");
+        printSeparator(20);
+        System.out.println("(1) RESUME");
+        System.out.println("(2) STATUS");
+        System.out.println("(3) EXIT GAME");
+
+    }
+
+    //main game loop
+    public static void gameLoop(){
+        while(isRunning){
+            printMenu();
+            int input = readInt("-> ", 3);
+            if(input == 1)
+                continueJourney();
+            else if (input == 2)
+                characterInfo();
+            else
+                isRunning = false;
+                
+        }
+    }
 }
+
