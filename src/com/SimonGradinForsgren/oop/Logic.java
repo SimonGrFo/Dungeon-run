@@ -10,6 +10,10 @@ public class Logic {
 
     public static boolean isRunning;
 
+    //story elements
+    public static int place = 0, act;
+    public static String[] places = {"Apartments", "backyard", };
+
     //method to get user input from console
     public static int readInt(String prompt, int userChoices) {
         int input;
@@ -81,8 +85,14 @@ public class Logic {
                 nameSet = true;
         }while(!nameSet);
 
+        //print story intro
+        Story.printIntro();
+
         //create new player object with the name
         player = new Player(name);
+
+        //print first story act intro
+        Story.printFirstActIntro();
 
         //setting isRunning to true, so the game loop can continue
         isRunning = true;
@@ -105,6 +115,8 @@ public class Logic {
         System.out.println(player.name + "/tHP: " + player.hp + "/" + player.maxHp);
         printSeparator(20);
         System.out.println("XP: " + player.xp);
+        printSeparator(20);
+
 
         //printing the chosen traits
         if (player.numAtkUpgrades > 0) {
@@ -120,7 +132,7 @@ public class Logic {
     //printing the main menu
     public static void printMenu() {
         clearConsole();
-        printHeading("MENU");
+        printHeading(places[place]);
         System.out.println("Choose an action");
         printSeparator(20);
         System.out.println("(1) RESUME");
