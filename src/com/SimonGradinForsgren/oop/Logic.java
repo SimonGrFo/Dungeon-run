@@ -318,7 +318,6 @@ public class Logic {
                     //woah you won!!!!!!!!!!!!
                     clearConsole();
                     printHeading("you bested the " + enemy.name + "!");
-                    // TODO would be cool to add specialised death messages for each enemy
                     // increase xp for killing enemy
                     player.xp += enemy.xp;
                     System.out.println("you earned "+ enemy.xp + "XP!");

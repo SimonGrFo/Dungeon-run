@@ -1,7 +1,7 @@
 package com.SimonGradinForsgren.oop;
 
 //This class stores methods to print out the story
-//i rewrote this a bunch of times then ran out of time, so it's still pretty bad
+//I rewrote this a bunch of times then ran out of time, so it's still pretty bad
 public class Story {
 
     public static void printIntro() {
@@ -78,9 +78,9 @@ public class Story {
         Logic.printSeparator(30);
         System.out.println("Act III END");
         Logic.printSeparator(30);
-        System.out.println(" ");
-        System.out.println(" ");
-        System.out.println(" ");
+        System.out.println("As you make your way out of the apartment into the larger apartment complex");
+        System.out.println("you notice that you are on the first floor.");
+        System.out.println("You can finally see the exit ahead of you and start to make your way towards it");
         Logic.anythingToContinue();
     }
 
@@ -89,9 +89,10 @@ public class Story {
         Logic.printSeparator(30);
         System.out.println("Act III END");
         Logic.printSeparator(30);
-        System.out.println("as you make your way to the front exit something moves in the corner of your eye");
-        System.out.println(" ");
-        System.out.println(" ");
+        System.out.println("as you make your way to the front exit something moves in the corner of your eye.");
+        System.out.println("All the shadows in the room move into each other, combining and becoming a tall dark shape.");
+        Logic.printSeparator(30);
+        System.out.println("You prepare to fight");
         Logic.anythingToContinue();
     }
 
