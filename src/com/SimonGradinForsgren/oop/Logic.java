@@ -3,8 +3,6 @@ import com.SimonGradinForsgren.oop.enemies.Enemy;
 
 import java.util.Scanner;
 
-import java.sql.SQLOutput;
-
 public class Logic {
     static Scanner scanner = new Scanner(System.in);
 
@@ -13,14 +11,14 @@ public class Logic {
     public static boolean isRunning;
 
     //random encounters
-    public static String[] encounters = {"Battle", "Battle", "Battle", "Rest", "Rest"};
+    public static String[] encounters = {" Battle ", " Battle ", " Battle ", " Rest ", " Rest "};
 
     //enemy names
-    public static String[] enemies = {"Shade" , "Shade" , "Banshee" , "Banshee" , "Ghost" };
+    public static String[] enemies = {" Shade " , " Shade " , " Banshee " , " Banshee " , " Ghost " };
 
     //story elements
     public static int place = 0, act = 1;
-    public static String[] places = {"Apartments", "backyard", };
+    public static String[] places = {"Apartments", "backyard", "" };
 
     //method to get user input from console
     public static int readInt(String prompt, int userChoices) {
@@ -132,8 +130,8 @@ public class Logic {
             encounters[0] = "battle";
             encounters[1] = "battle";
             encounters[2] = "battle";
-            encounters[3] = "rest";
-            encounters[4] = "rest";
+            encounters[3] = "battle";
+            encounters[4] = "battle";
         }else if(player.xp >= 50 && act == 2) {
             act = 3;
             place = 2;
@@ -146,15 +144,15 @@ public class Logic {
             //assign values to enemies
             enemies[0] = "Shade";
             enemies[1] = "Shade";
-            enemies[2] = "Shade";
-            enemies[3] = "Shade";
+            enemies[2] = "Banshee";
+            enemies[3] = "Banshee";
             enemies[4] = "Shade";
             //assign values to encounters
             encounters[0] = "battle";
             encounters[1] = "battle";
             encounters[2] = "battle";
-            encounters[3] = "rest";
-            encounters[4] = "rest";
+            encounters[3] = "battle";
+            encounters[4] = "battle";
         }else if(player.xp >= 100 && act == 3){
             act = 4;
             place = 3;
@@ -163,11 +161,11 @@ public class Logic {
             //let the player level up
             player.chooseTrait();
             //story
-            Story.printFourthActIntro();    //TODO finish all acts in story
+            Story.printFourthActIntro();
             //fully heal the player before the final boss
             player.hp = player.maxHp;
             //start the final boss battle
-            // TODO finalBattle();
+            finalBattle();
 
         }
 
@@ -178,14 +176,15 @@ public class Logic {
         //random number between 0 and the length of the encounters array
         int encounter = (int) (Math.random() * encounters.length);
         //calling the respective methods
-        if(encounters[encounter].equals("Battle")) {
+        if (encounters[encounter].trim().equals("Battle")) {
             randomBattle();
-        }else if(encounters[encounter].equals("Rest")){
-        //takeRest();
-        }else {
-            //Store
+        } else if (encounters[encounter].trim().equals("Rest")) {
+            takeRest();
+        } else {
+            shop();
         }
     }
+
 
     //method to continue the journey
     public static void continueJourney() {
@@ -203,8 +202,8 @@ public class Logic {
         printHeading("STATUS");
         System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHp);
         printSeparator(20);
-        // player xp and gold
-        System.out.println("XP: " + player.xp + "\tGold" + player.gold);
+        // player xp and souls
+        System.out.println("XP: " + player.xp + "\tSouls" + player.souls);
         printSeparator(20);
         // number of heals
         System.out.println("# of heals; " + player.heals);
@@ -222,13 +221,61 @@ public class Logic {
         anythingToContinue();
     }
 
+    //shop
+    public static void shop(){
+        clearConsole();
+        printHeading("You encounter a stranger. \n He offers you a bargain");
+        int price = (int) (Math.random()* (10 + player.heals*3) + 10 + player.heals);
+        System.out.println("- Heal; " + price + " souls.");
+        printSeparator(20);
+        //ask the player to buy one
+        System.out.println("Do you want to buy one?\n(1) Yes.\n(2) No.");
+        int input = readInt("-> ", 2);
+        if(input == 1){
+            clearConsole();
+            //check if the player has enough souls to buy the healing item
+            if(player.souls >= price){
+                printHeading("You bought a healing item for " + price + "souls");
+                player.souls++;
+                player.souls -= price;
+            }else
+                printHeading("You are unable to afford the item.");
+            anythingToContinue();
+        }
+    }
+
+    //rest
+    public static void takeRest(){
+        clearConsole();
+        if(player.restsLeft >= 1){
+            printHeading("do you want to take a rest? (" + player.restsLeft + " rest(s) left.");
+            System.out.println("(1) Yes\n(2) No");
+            int input = readInt("-> ", 2);
+            if (input == 1){
+                //player rests
+                clearConsole();
+                if(player.hp < player.maxHp){
+                    int hpRestored = (int) (Math.random() * player.xp/4 + 1) + 10;
+                    player.hp += hpRestored;
+                    if (player.hp > player.maxHp)
+                        player.hp = player.maxHp;
+                    System.out.println("you rested and restored " + hpRestored + " health.");
+                    System.out.println("You are now at " + player.hp + "/" + player.maxHp + "health.");
+                    player.restsLeft--;
+                }
+            }else
+                System.out.println("You are already at full health");
+            anythingToContinue();
+        }
+    }
+
     //create random battle
     public static void randomBattle(){
         clearConsole();
         printHeading("You came upon an entity and prepare to fight");
         anythingToContinue();
         //random enemy
-        battle(new Enemy(enemies((int)(Math.random()* enemies.length))), player.xp);
+        battle(new Enemy(enemies[(int)(Math.random()*enemies.length)], player.xp));
     }
 
     //main BATTLE method
@@ -259,7 +306,7 @@ public class Logic {
                 //print information about that happened in the round of the battle
                 clearConsole();
                 printHeading("BATTLE");
-                System.out.println("You dealt" + dmg + "damage to the" + enemy.name + ".");
+                System.out.println("You dealt " + dmg + " damage to the " + enemy.name + ".");
                 printSeparator(15);
                 System.out.println("The " + enemy.name + "dealt " + dmgTook + " damage to you.");
                 anythingToContinue();
@@ -275,14 +322,40 @@ public class Logic {
                     // increase xp for killing enemy
                     player.xp += enemy.xp;
                     System.out.println("you earned "+ enemy.xp + "XP!");
+                    //random loot
+                    boolean addRest = (Math.random()*5 + 1 <= 2.25);
+                    int soulsEarned = (int) (Math.random()*enemy.xp);
+                    if (addRest){
+                        player.restsLeft++;
+                        System.out.println("you earned the chance to get an additional rest!");
+                    }
+                    if(soulsEarned > 0){
+                        player.souls += soulsEarned;
+                        System.out.println("you collect " + soulsEarned + "souls from the " + enemy.name + "!");
+                    }
                     anythingToContinue();
                     break;
                 }
             }else if(input == 2){
                 //heal
                 clearConsole();
-                if(player.pots > 0 && player.hp < player.maxHp){
+                if(player.heals > 0 && player.hp < player.maxHp){
                     //player CAN heal
+                    //ask if player is sure they want to heal
+                    printHeading("Do you want to heal? (" + player.heals + "left).");
+                    System.out.println("(1) Yes\n(2) No");
+                    input = readInt("-> ", 2);
+                    if (input == 1){
+                        player.hp = player.maxHp;
+                        clearConsole();
+                        printHeading("You healed, your health is not at " + player.maxHp);
+                        anythingToContinue();
+                    }
+                }else{
+                    //player CAN'T heal
+                    printHeading("You are unable to heal.");
+                    anythingToContinue();
+
                 }
             }else{
                 //RUN
@@ -318,6 +391,14 @@ public class Logic {
         System.out.println("(1) RESUME");
         System.out.println("(2) STATUS");
         System.out.println("(3) EXIT GAME");
+    }
+
+    //final boss
+    public static void finalBattle(){
+        battle(new Enemy("Shape", 300));
+        //print ending
+        Story.printEnd(player);
+        isRunning = false;
 
     }
 

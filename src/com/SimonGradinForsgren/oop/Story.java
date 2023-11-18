@@ -24,6 +24,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printFirstActOutro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -34,6 +35,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printSecondActIntro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -44,6 +46,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printSecondActOutro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -54,6 +57,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printThirdActIntro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -64,6 +68,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printThirdActOutro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -74,6 +79,7 @@ public class Story {
         System.out.println(" ");
         Logic.anythingToContinue();
     }
+
     public static void printFourthActIntro() {
         Logic.clearConsole();
         Logic.printSeparator(30);
@@ -85,6 +91,9 @@ public class Story {
         Logic.anythingToContinue();
     }
 
-
-
+    public static void printEnd(Player player) {
+        Logic.clearConsole();
+        Logic.printSeparator(30);
+        System.out.println("You escaped the apartment");
+        }
 }

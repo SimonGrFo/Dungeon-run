@@ -5,7 +5,7 @@ public class Player extends Characters{
     //integers to store number of upgrades/skills in each path
     public int numAtkUpgrades, numDefUpgrades;
     //others stats
-    int gold, restsLeft, pots;
+    int souls, restsLeft, heals;
     //Arrays to store skill names
     public String[] AtkUpgrades ={"Attack I", "Attack II", "Attack III", "Attack IV"};
     public String[] DefUpgrades ={"Defense I", "Defense II", "Defense III", "Defense IV"};
@@ -19,7 +19,7 @@ public class Player extends Characters{
         this.numAtkUpgrades = 0;
         this.numDefUpgrades = 0;
         //see additional stats
-        this.gold = 5;
+        this.souls = 5;
         this.restsLeft = 1;
         this.heals = 0;
         //let player choose a trait when creating a new character
