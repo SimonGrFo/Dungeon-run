@@ -18,7 +18,7 @@ public class Logic {
 
     //story elements
     public static int place = 0, act = 1;
-    public static String[] places = {"Apartments", "backyard", "" };
+    public static String[] places = {"3rd floor", "2nd floor", "1st floor" };
 
     //method to get user input from console
     public static int readInt(String prompt, int userChoices) {
@@ -70,8 +70,8 @@ public class Logic {
         clearConsole();
         printSeparator(40);
         printSeparator(30);
-        System.out.println("THIS IS A GAME");
-        System.out.println("REALLY COOL GAME!!!!");
+        System.out.println("Apartments");
+        System.out.println("By Simon");
         printSeparator(30);
         printSeparator(40);
         anythingToContinue();
