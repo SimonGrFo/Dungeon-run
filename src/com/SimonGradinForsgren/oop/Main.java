@@ -5,6 +5,8 @@
 // TODO -   well?" and if you say yes you just die since you jump down a well.
 // TODO - 4 would be cool to add specialised death messages for each enemy.
 
+//WARNING !!!!!! damage is very inconsistent and sometimes you or enemies only deal 0, I will work on this.
+
 package com.SimonGradinForsgren.oop;
 import java.util.Scanner;
 
