@@ -1,4 +1,6 @@
 package com.SimonGradinForsgren.oop;
+import com.SimonGradinForsgren.oop.enemies.Enemy;
+
 import java.util.Scanner;
 
 import java.sql.SQLOutput;
@@ -58,7 +60,7 @@ public class Logic {
 
     //method to stop the game from doing anything until the users starts yapping
     public static void anythingToContinue() {
-        System.out.println("/nEnter anything to continue...");
+        System.out.println("\nEnter anything to continue...");
         scanner.next();
     }
 
@@ -177,7 +179,7 @@ public class Logic {
         int encounter = (int) (Math.random() * encounters.length);
         //calling the respective methods
         if(encounters[encounter].equals("Battle")) {
-            //randomBattle();
+            randomBattle();
         }else if(encounters[encounter].equals("Rest")){
         //takeRest();
         }else {
@@ -199,9 +201,13 @@ public class Logic {
     public static void characterInfo() {
         clearConsole();
         printHeading("STATUS");
-        System.out.println(player.name + "/tHP: " + player.hp + "/" + player.maxHp);
+        System.out.println(player.name + "\tHP: " + player.hp + "/" + player.maxHp);
         printSeparator(20);
-        System.out.println("XP: " + player.xp);
+        // player xp and gold
+        System.out.println("XP: " + player.xp + "\tGold" + player.gold);
+        printSeparator(20);
+        // number of heals
+        System.out.println("# of heals; " + player.heals);
         printSeparator(20);
 
 
@@ -216,6 +222,93 @@ public class Logic {
         anythingToContinue();
     }
 
+    //create random battle
+    public static void randomBattle(){
+        clearConsole();
+        printHeading("You came upon an entity and prepare to fight");
+        anythingToContinue();
+        //random enemy
+        battle(new Enemy(enemies((int)(Math.random()* enemies.length))), player.xp);
+    }
+
+    //main BATTLE method
+    public static void battle(Enemy enemy){
+        //main battle loop
+        while(true){
+            clearConsole();
+            printHeading(enemy.name + "\nHP: " + enemy.hp + "/" + enemy.maxHp);
+            printHeading(player.name + "\nHP: " + player.hp + "/" + player.maxHp);
+            System.out.println("Choose an action");
+            printSeparator(20);
+            System.out.println("(1) Fight\n(2) Heal\n(3) Escape");
+            int input = readInt("-> ", 3);
+            if(input == 1){
+                //FIGHT!!!
+                //calculate damage dealt and taken by and to enemies
+                int dmg = player.attack() - enemy.defend();
+                int dmgTook = enemy.attack() - player.defend();
+                //check that dmg and dmgTook isn't negative so player doesn't heal from enemy attack vice versa
+                if(dmgTook < 0){
+                    dmg -= dmgTook/2;
+                    dmgTook = 0;
+                }
+                if (dmg < 0)
+                    dmg = 0;
+                player.hp -= dmgTook;
+                enemy.hp -= dmg;
+                //print information about that happened in the round of the battle
+                clearConsole();
+                printHeading("BATTLE");
+                System.out.println("You dealt" + dmg + "damage to the" + enemy.name + ".");
+                printSeparator(15);
+                System.out.println("The " + enemy.name + "dealt " + dmgTook + " damage to you.");
+                anythingToContinue();
+                //check if the player is still alive
+                if(player.hp <= 0){
+                    playerDied(); //method that ends the game since you didn't pop off and win
+                    break;
+                } else if(enemy.hp <= 0){
+                    //woah you won!!!!!!!!!!!!
+                    clearConsole();
+                    printHeading("you bested the " + enemy.name + "!");
+                    // TODO would be cool to add specialised death messages for each enemy
+                    // increase xp for killing enemy
+                    player.xp += enemy.xp;
+                    System.out.println("you earned "+ enemy.xp + "XP!");
+                    anythingToContinue();
+                    break;
+                }
+            }else if(input == 2){
+                //heal
+                clearConsole();
+                if(player.pots > 0 && player.hp < player.maxHp){
+                    //player CAN heal
+                }
+            }else{
+                //RUN
+                clearConsole();
+                //
+                if(Math.random()*10 + 1 <= 3.5){
+                    printHeading("You ran away from the " + enemy.name + "!");
+                    anythingToContinue();
+                    break;
+                }else{
+                    printHeading("Your escape attempt was unsuccessful and the" + enemy.name + "blocked your path.");
+                    //calculate how much damage you took in your failed escape attempt
+                    int dmgTook = enemy.attack();
+                    System.out.println("You took " + dmgTook + "damage.");
+                    anythingToContinue();
+                    //see if the player survived
+                    if(player.hp <= 0)
+                        playerDied();
+
+                }
+
+            }
+
+        }
+    }
+
     //printing the main menu
     public static void printMenu() {
         clearConsole();
@@ -226,6 +319,14 @@ public class Logic {
         System.out.println("(2) STATUS");
         System.out.println("(3) EXIT GAME");
 
+    }
+
+    //method for when player dies
+    public static void playerDied(){
+        clearConsole();
+        printHeading("you were unable to escape, you died");
+        printHeading("you attained " + player.xp + "XP in your attempt");
+        isRunning = false;
     }
 
     //main game loop
