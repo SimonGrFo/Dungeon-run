@@ -12,7 +12,6 @@ public class Story {
         System.out.println("with peeling wallpapers. A single flickering light bulb casts long shadows over the room.");
         System.out.println("The eerie silence is only broken by the hum of an air conditioner.");
         Logic.anythingToContinue();
-
     }
 
     public static void printFirstActIntro() {
@@ -24,7 +23,6 @@ public class Story {
         System.out.println(" ");
         System.out.println(" ");
         Logic.anythingToContinue();
-
     }
     public static void printFirstActOutro() {
         Logic.clearConsole();
@@ -35,7 +33,6 @@ public class Story {
         System.out.println(" ");
         System.out.println(" ");
         Logic.anythingToContinue();
-
     }
     public static void printSecondActIntro() {
         Logic.clearConsole();
@@ -46,7 +43,6 @@ public class Story {
         System.out.println(" ");
         System.out.println(" ");
         Logic.anythingToContinue();
-
     }
     public static void printSecondActOutro() {
         Logic.clearConsole();
@@ -57,7 +53,38 @@ public class Story {
         System.out.println(" ");
         System.out.println(" ");
         Logic.anythingToContinue();
-
     }
+    public static void printThirdActIntro() {
+        Logic.clearConsole();
+        Logic.printSeparator(30);
+        System.out.println("Act III");
+        Logic.printSeparator(30);
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ");
+        Logic.anythingToContinue();
+    }
+    public static void printThirdActOutro() {
+        Logic.clearConsole();
+        Logic.printSeparator(30);
+        System.out.println("Act III END");
+        Logic.printSeparator(30);
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ");
+        Logic.anythingToContinue();
+    }
+    public static void printFourthActIntro() {
+        Logic.clearConsole();
+        Logic.printSeparator(30);
+        System.out.println("Act III END");
+        Logic.printSeparator(30);
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(" ");
+        Logic.anythingToContinue();
+    }
+
+
 
 }

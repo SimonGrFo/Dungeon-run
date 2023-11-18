@@ -9,12 +9,6 @@ public class Main {
         //start the game
         Logic.startGame();
 
-
-
-
-
     }
-
-
 
 }

@@ -10,8 +10,14 @@ public class Logic {
 
     public static boolean isRunning;
 
+    //random encounters
+    public static String[] encounters = {"Battle", "Battle", "Battle", "Rest", "Rest"};
+
+    //enemy names
+    public static String[] enemies = {"Shade" , "Shade" , "Banshee" , "Banshee" , "Ghost" };
+
     //story elements
-    public static int place = 0, act;
+    public static int place = 0, act = 1;
     public static String[] places = {"Apartments", "backyard", };
 
     //method to get user input from console
@@ -102,10 +108,91 @@ public class Logic {
         gameLoop();
     }
 
+    //method that changes the games values based on how much xp the player has
+    public static void checkAct(){
+        //change acts based on xp
+        if(player.xp >= 10 && act == 1){
+            act = 2;
+            place = 1;
+            //story
+            Story.printFirstActOutro();
+            //let the player level up
+            player.chooseTrait();
+            //story
+            Story.printSecondActIntro();
+            //assign values to enemies
+            enemies[0] = "Shade";
+            enemies[1] = "Shade";
+            enemies[2] = "Shade";
+            enemies[3] = "Shade";
+            enemies[4] = "Shade";
+            //assign values to encounters
+            encounters[0] = "battle";
+            encounters[1] = "battle";
+            encounters[2] = "battle";
+            encounters[3] = "rest";
+            encounters[4] = "rest";
+        }else if(player.xp >= 50 && act == 2) {
+            act = 3;
+            place = 2;
+            //story
+            Story.printSecondActOutro();
+            //let the player level up
+            player.chooseTrait();
+            //story
+            Story.printThirdActIntro();
+            //assign values to enemies
+            enemies[0] = "Shade";
+            enemies[1] = "Shade";
+            enemies[2] = "Shade";
+            enemies[3] = "Shade";
+            enemies[4] = "Shade";
+            //assign values to encounters
+            encounters[0] = "battle";
+            encounters[1] = "battle";
+            encounters[2] = "battle";
+            encounters[3] = "rest";
+            encounters[4] = "rest";
+        }else if(player.xp >= 100 && act == 3){
+            act = 4;
+            place = 3;
+            //story
+            Story.printThirdActOutro();
+            //let the player level up
+            player.chooseTrait();
+            //story
+            Story.printFourthActIntro();    //TODO finish all acts in story
+            //fully heal the player before the final boss
+            player.hp = player.maxHp;
+            //start the final boss battle
+            // TODO finalBattle();
+
+        }
+
+    }
+
+    //method to calculate a random encounter
+    public static void randomEncounter() {
+        //random number between 0 and the length of the encounters array
+        int encounter = (int) (Math.random() * encounters.length);
+        //calling the respective methods
+        if(encounters[encounter].equals("Battle")) {
+            //randomBattle();
+        }else if(encounters[encounter].equals("Rest")){
+        //takeRest();
+        }else {
+            //Store
+        }
+    }
 
     //method to continue the journey
     public static void continueJourney() {
-
+        //Check if player must progress to the next act
+        checkAct();
+        //Check if the player is in the last act (final boss) and if the player is not in last act then play a random
+        //enemy encounter
+        if (act != 4)
+            randomEncounter();
     }
 
     //printing out the most important information about the player character
