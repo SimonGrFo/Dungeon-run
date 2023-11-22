@@ -1,5 +1,4 @@
-package com.SimonGradinForsgren.oop;
-import com.SimonGradinForsgren.oop.enemies.Enemy;
+package com.SimonGradinForsgren.oop.Main;
 
 import java.util.Scanner;
 
@@ -424,4 +423,3 @@ public class Logic {
         }
     }
 }
-

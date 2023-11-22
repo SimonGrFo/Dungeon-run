@@ -7,8 +7,7 @@
 
 //WARNING !!!!!! damage is very inconsistent and sometimes you or enemies only deal 0, I will work on this.
 
-package com.SimonGradinForsgren.oop;
-import java.util.Scanner;
+package com.SimonGradinForsgren.oop.Main;
 
 public class Main {
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
-package com.SimonGradinForsgren.oop;
+package com.SimonGradinForsgren.oop.Main;
 
-public class Player extends Characters{
+public class Player extends Characters {
 
     //integers to store number of upgrades/skills in each path
     public int numAtkUpgrades, numDefUpgrades;

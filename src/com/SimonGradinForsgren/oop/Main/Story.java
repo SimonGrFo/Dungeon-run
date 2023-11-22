@@ -1,4 +1,6 @@
-package com.SimonGradinForsgren.oop;
+package com.SimonGradinForsgren.oop.Main;
+
+import com.SimonGradinForsgren.oop.Main.Player;
 
 //This class stores methods to print out the story
 //I rewrote this a bunch of times then ran out of time, so it's still pretty bad

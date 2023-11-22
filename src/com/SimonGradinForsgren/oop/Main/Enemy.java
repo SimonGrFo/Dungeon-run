@@ -1,6 +1,4 @@
-package com.SimonGradinForsgren.oop.enemies;
-
-import com.SimonGradinForsgren.oop.Characters;
+package com.SimonGradinForsgren.oop.Main;
 
 public class Enemy extends Characters {
     int playerXp;

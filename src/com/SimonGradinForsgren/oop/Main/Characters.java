@@ -1,4 +1,4 @@
-package com.SimonGradinForsgren.oop;
+package com.SimonGradinForsgren.oop.Main;
 
 public abstract class Characters {
 
