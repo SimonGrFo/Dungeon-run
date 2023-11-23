@@ -2,20 +2,14 @@ package com.SimonGradinForsgren.oop.Main;
 
 import org.junit.jupiter.api.Test;
 
-class LogicTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-
+class PlayerTest {
     @Test
-    void combat(){
+    void choosingATrait(){
 
 
 
     }
 
-    @Test
-    void dying(){
-
-
-
-    }
 }
